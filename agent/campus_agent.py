@@ -280,16 +280,22 @@ class CampusBuddyAgent:
 
         return None
 
-    def _run_with_groq(self, prompt: str) -> Optional[Dict[str, Any]]:
+    def _run_with_groq(self, prompt: str, chat_history: Optional[List[Dict[str, str]]] = None) -> Optional[Dict[str, Any]]:
         """Executes the full ReAct loop with live Groq LLM + Python tools."""
+        if not self.api_key:
+            self.api_key = _load_dotenv_key("GROQ_API_KEY")
         if not self.api_key:
             return None
 
         messages: List[Dict[str, Any]] = [{"role": "system", "content": self._system_instructions()}]
-        # Include recent conversational context (last 4 exchanges)
-        for past in self.history[-4:]:
-            messages.append({"role": "user", "content": past["query"]})
-            messages.append({"role": "assistant", "content": past["answer"]})
+        # Include stateless client history (Vercel) or in-memory recent context
+        source_history = chat_history if chat_history is not None else self.history
+        for past in source_history[-4:]:
+            q_text = past.get("query") or ""
+            a_text = past.get("answer") or ""
+            if q_text and a_text:
+                messages.append({"role": "user", "content": q_text})
+                messages.append({"role": "assistant", "content": a_text})
         messages.append({"role": "user", "content": prompt})
 
         tools_called: List[str] = []
@@ -364,7 +370,7 @@ class CampusBuddyAgent:
         )
         return {"trace": trace, "answer": answer_text}
 
-    def run(self, user_prompt: str) -> Dict[str, Any]:
+    def run(self, user_prompt: str, chat_history: Optional[List[Dict[str, str]]] = None) -> Dict[str, Any]:
         """
         Execute the complete ReAct cycle for a user query.
         Uses Groq LLM tool-calling when online and falls back seamlessly offline.
@@ -389,7 +395,7 @@ class CampusBuddyAgent:
             }
 
         # 1. Primary path: Live Groq ReAct LLM + Tool Execution
-        groq_result = self._run_with_groq(prompt)
+        groq_result = self._run_with_groq(prompt, chat_history=chat_history)
         if groq_result is not None:
             self.history.append({
                 "timestamp": datetime.now().isoformat(),

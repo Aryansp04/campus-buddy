@@ -224,13 +224,21 @@ def build_campus_buddy_document() -> str:
 
 app = FastAPI(title="Campus Buddy — Sylva Living Green Edition")
 agent = CampusBuddyAgent()
+_CACHED_DOCUMENT: Optional[str] = None
 
-# Serve /landing-pages/* byte-for-byte from public/landing-pages/
-app.mount("/landing-pages", StaticFiles(directory=LANDING_PAGES_DIR), name="landing-pages")
+# Serve /landing-pages/* locally (on Vercel, public/landing-pages/* is served directly by Edge CDN)
+if os.path.isdir(LANDING_PAGES_DIR):
+    app.mount("/landing-pages", StaticFiles(directory=LANDING_PAGES_DIR), name="landing-pages")
+
+
+class ChatTurn(BaseModel):
+    query: str
+    answer: str
 
 
 class ChatRequest(BaseModel):
     message: str
+    history: Optional[List[ChatTurn]] = None
 
 
 class AttendanceRequest(BaseModel):
@@ -255,7 +263,13 @@ class GpaRequest(BaseModel):
 
 
 @app.get("/", response_class=HTMLResponse)
+@app.get("/api/index.py", response_class=HTMLResponse, include_in_schema=False)
 def serve_dashboard() -> HTMLResponse:
+    global _CACHED_DOCUMENT
+    if os.environ.get("VERCEL"):
+        if _CACHED_DOCUMENT is None:
+            _CACHED_DOCUMENT = build_campus_buddy_document()
+        return HTMLResponse(content=_CACHED_DOCUMENT)
     return HTMLResponse(content=build_campus_buddy_document())
 
 
@@ -284,7 +298,8 @@ def api_overview() -> Dict[str, Any]:
 @app.post("/api/chat")
 def api_chat(req: ChatRequest) -> JSONResponse:
     try:
-        out = agent.run(req.message)
+        turns = [t.model_dump() for t in req.history] if req.history else None
+        out = agent.run(req.message, chat_history=turns)
         trace_dict = asdict(out["trace"]) if out.get("trace") else None
         return JSONResponse({"answer": out["answer"], "trace": trace_dict})
     except Exception:

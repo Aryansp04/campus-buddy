@@ -1,0 +1,50 @@
+[
+  {
+    "category": "Library",
+    "title": "Central University Library Hours and Resources",
+    "keywords": ["library", "books", "reading room", "study", "borrow", "timings", "hours", "night"],
+    "content": "The Central Library is open Monday to Saturday from 08:00 AM to 11:00 PM. During final exam weeks, the 2nd-floor reading hall remains open 24/7. Students can borrow up to 4 books for 14 days using their student ID badge. Digital catalog and journal access (IEEE, JSTOR) are accessible via library.campus.edu."
+  },
+  {
+    "category": "Dining",
+    "title": "Campus Cafeteria & Food Court",
+    "keywords": ["food", "cafeteria", "canteen", "lunch", "dinner", "breakfast", "meal", "coffee", "menu"],
+    "content": "Main Dining Hall Timings:\n- Breakfast: 07:30 AM - 09:30 AM\n- Lunch: 12:00 PM - 02:30 PM\n- Evening Snacks: 04:30 PM - 06:00 PM\n- Dinner: 07:30 PM - 09:30 PM\nPopular Spots: Night Owl Cafe (near Student Center, open till 2:00 AM) and Nescafe Kiosk near Engineering Block."
+  },
+  {
+    "category": "Health & Safety",
+    "title": "Campus Health & Medical Center",
+    "keywords": ["doctor", "health", "hospital", "clinic", "emergency", "medicine", "nurse", "sick", "appointment"],
+    "content": "The Campus Medical Health Center is located next to Residential Hall Block 3. Operating hours: 24/7 emergency care. Resident Doctor consultations: 09:00 AM - 05:00 PM. Ambulance helpline: Ext. 911 or call +1-800-CAMPUS-DOC. Free basic medicine and first aid available to all registered students."
+  },
+  {
+    "category": "IT & Wi-Fi",
+    "title": "Campus Wi-Fi & IT Helpdesk",
+    "keywords": ["wifi", "internet", "network", "password", "it", "laptop", "login", "portal", "helpdesk"],
+    "content": "Wi-Fi Network SSID: 'Campus-Secure' (WPA3-Enterprise). Log in using your student email (rollnumber@campus.edu) and campus portal password. For connection issues, software licensing (MATLAB, Office 365), visit IT Helpdesk in Engineering Block A Room 104 or email ithelpdesk@campus.edu."
+  },
+  {
+    "category": "Transportation",
+    "title": "Campus Shuttle Bus Schedule",
+    "keywords": ["shuttle", "bus", "transport", "metro", "city", "commute", "schedule", "timings"],
+    "content": "Campus Shuttles run every 20 minutes from 07:00 AM to 10:00 PM between North Gate, Central Library, Metro Station, and South Residential Halls. Weekend service runs hourly. Tracking is available on the Campus Bus live app."
+  },
+  {
+    "category": "Student Services",
+    "title": "Registrar, Academic Affairs & Grades",
+    "keywords": ["fees", "transcript", "grades", "exam", "datesheet", "registration", "academic", "calendar", "dean", "leave"],
+    "content": "Academic Affairs Office (Block Admin-201) operates Monday through Friday, 09:30 AM to 04:30 PM. For transcript requests, grade dispute submissions, or semester fee queries, submit requests online through the student ERP portal before the 15th of each month."
+  },
+  {
+    "category": "Student Activities & Clubs",
+    "title": "AgentForge & Student Technical Clubs",
+    "keywords": ["club", "clubs", "hackathon", "agentforge", "ai", "coding", "robotics", "sports", "cultural"],
+    "content": "Campus technical and cultural clubs meet every Wednesday and Friday evening at the Student Activity Center (SAC). AgentForge AI Club organizes weekend workshops and hackathons in Turing Hall. Sign up at clubs.campus.edu or visit SAC Room 202."
+  },
+  {
+    "category": "Gym & Sports",
+    "title": "Sports Complex & Gymnasium",
+    "keywords": ["gym", "sports", "fitness", "swimming", "badminton", "basketball", "workout"],
+    "content": "The indoor sports facility includes basketball courts, badminton courts, an Olympic-size swimming pool, and gym. Hours: 06:00 AM - 09:30 AM & 04:00 PM - 09:00 PM daily. Locker keys and equipment checkout require student ID card."
+  }
+]
